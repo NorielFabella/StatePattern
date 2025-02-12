@@ -1,33 +1,26 @@
-public class ActiveState implements AccountState
-{
-
+public class ActiveState implements AccountState{
     @Override
-    public void deposit(Double depositAmount) {
-       
+    public void withdraw(Account account, double withdrawAmount){
+        account.setBalance((account.getBalance()) + withdrawAmount);
+        System.out.println("Deposit, " + withdrawAmount + ". " + account);
     }
-
     @Override
-    public void withdraw(Double withdrawAmount) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'withdraw'");
+    public void deposit(Account account, double depositAmount){
+        account.setBalance((account.getBalance()) - depositAmount);
+        System.out.println("Withdraw, " + depositAmount + ". " + account);
     }
-
     @Override
-    public void activate() {
-        System.out.println("Account is already activated!");
+    public void activate(Account account){
+        System.out.println("This account is already activated ");
     }
-
     @Override
-    public void suspend() {
-        
-        System.out.println("Account is suspended!");
+    public void close(Account account){
+        account.setAccountState(new ClosedState());
+        System.out.println("Account is closed");
     }
-
     @Override
-    public void close() {
-        System.out.println("Account is closed!");
+    public void suspend(Account account){
+        account.setAccountState(new SuspendedState());
+        System.out.println("Account is suspended");
     }
-
-    
-    
 }
